@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      enabled: true
+      force: true
+      charset: UTF-8
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: demo
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: panda
+    password: 1357
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: none
+

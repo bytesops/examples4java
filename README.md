@@ -24,3 +24,4 @@
 | 003 | jpa-mysql-02 | SpringBoot JPA 实现复杂查询（手写 SQL 语句） |
 | 004 | jpa-mysql-03 | SpringBoot JPA 实现复杂查询（借助 Specification） |
 | 005 | jpa-mysql-04 | SpringBoot JPA 实现复杂查询（借助 [jpa-spec](https://github.com/wenhao/jpa-spec)） |
+| 007 | pan-files-share | SpringBoot JPA 网盘目录数据存储接口实现 |
