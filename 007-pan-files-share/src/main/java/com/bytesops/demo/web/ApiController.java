@@ -13,8 +13,9 @@ public class ApiController {
     private PanFileDao panFileDao;
 
     @PostMapping("/file")
-    public String saveFile(@RequestBody PanFile file) {
+    @CrossOrigin
+    public PanFile saveFile(@RequestBody PanFile file) {
         panFileDao.save(file);
-        return "success";
+        return file;
     }
 }

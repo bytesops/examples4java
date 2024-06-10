@@ -12,14 +12,14 @@
 
 (function () {
     // 获取你某个群组的 listshare 接口数据
-    let listshareUrl = 'https://pan.baidu.com/mbox/group/listshare?clienttype=0&app_id=250528&web=1&dp-logid=79869100702558280071&type=2&gid=1005082622835627599&limit=50&desc=1'
+    let listshareUrl = 'https://pan.baidu.com/mbox/group/listshare?clienttype=0&app_id=250528&web=1&dp-logid=48406900157995870080&type=2&gid=434194500404134280&limit=50&desc=1'
     // 提取出来 listshare 接口中的必要参数，下一个 shareinfo 接口会用
     let clienttype = '0'
     let web = '1'
     let type = '2'
     let app_id = '250528'
-    let dp_logid = '79869100702558280071'
-    let gid = '1005082622835627599'
+    let dp_logid = '48406900157995870080'
+    let gid = '434194500404134280'
 
     // 获取群文件分享列表
     // 第一级目录只取了 50 条，如果不够，你再改逻辑
@@ -59,18 +59,25 @@
         return new Promise((resolve) => setTimeout(resolve, time));
     }
 
+    let count=0
+
     function saveToDB(item) {
+        count++
+        if (count % 1000 === 0) {
+            console.log("save at " + count + ", now is" + new Date())
+        }
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/file',
-            data: item,
+            data: JSON.stringify(item),
+            contentType: "application/json",
             dataType: "json",
             async: true, // 自己的服务器，随便造
             success: function (res) {
                 // 可选重试
             },
             error: function (err) {
-                console.error(err);
+                // console.error(err);
                 // 可选重试
             }
         });
@@ -86,7 +93,7 @@
         let size = file_item.size
         let server_ctime = file_item.server_ctime
         let server_mtime = file_item.server_mtime
-        console.log('开始获取 ' + server_filename + ' 相关资料')
+        // console.log('开始获取 ' + server_filename + ' 相关资料')
 
         //
         let postItem = {
@@ -102,7 +109,7 @@
         saveToDB(postItem)
         // 递归遍历目录
         if (is_dir) {
-            console.log(fs_id, server_filename, 'is dir, start get sub items.')
+            // console.log(fs_id, server_filename, 'is dir, start get sub items.')
             let page = 1
             let shareinfoUrl = 'https://pan.baidu.com/mbox/msg/shareinfo' +
                 '?from_uk=' + from_uk +
@@ -120,9 +127,9 @@
                 '&dp-logid=' + dp_logid
             // 请求子级目录文件列表
             // 每次请求停顿 0.5s 避免封控
-            console.log('sleep 500ms', new Date().getTime())
+            // console.log('sleep 500ms', new Date().getTime())
             await sleep(500);
-            console.log('开始获取第' + page + '页', new Date().getTime())
+            // console.log('开始获取第' + page + '页', new Date().getTime())
             $.ajax({
                 type: 'POST',
                 url: shareinfoUrl,
@@ -160,9 +167,9 @@
                                 '&web=' + web +
                                 '&dp-logid=' + dp_logid
                             // 每次请求停顿 0.5s 避免封控
-                            console.log('sleep 500ms', new Date().getTime())
+                            // console.log('sleep 500ms', new Date().getTime())
                             await sleep(500);
-                            console.log('开始获取第' + page + '页', new Date().getTime())
+                            // console.log('开始获取第' + page + '页', new Date().getTime())
                             $.ajax({
                                 type: 'POST',
                                 url: shareinfoUrl,
@@ -188,18 +195,18 @@
                     }
 
                     getNext()
-                    console.log(fs_id, server_filename, '获取完毕,总计' + page + '页')
+                    // console.log(fs_id, server_filename, '获取完毕,总计' + page + '页')
                     // console.log(file_list)
                     for (const sub_item of file_list) {
                         getShareInfo(msg_id, from_uk, sub_item, fs_id)
                     }
                 },
                 error: function (err) {
-                    console.error(err);
+                    // console.error(err);
                 }
             });
         } else {
-            console.log(fs_id, server_filename, 'is file, done.')
+            // console.log(fs_id, server_filename, 'is file, done.')
         }
     }
 
