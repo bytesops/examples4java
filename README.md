@@ -14,14 +14,30 @@
 
 每个项目可能额外涵盖其他的知识点，大家无需关注（比如辅助性的 lombok 等），只需关注项目说明中提到的功能点即可。
 
-
-
-| 编号 | 示例 | 说明 |
-|:-------:|-------|-------|
-| 000 | start | 基于 SpringBoot 的初始化项目，构建自 https://start.aliyun.com 默认未说明情况下所有项目都是基于这个为底座进行构建 |
-| 001 | hello-world | SpringBoot 实现 HelloWorld, API调用能正常返回结果 |
-| 002 | jpa-mysql-01 | SpringBoot JPA 实现简单 CURD |
-| 003 | jpa-mysql-02 | SpringBoot JPA 实现复杂查询（手写 SQL 语句） |
-| 004 | jpa-mysql-03 | SpringBoot JPA 实现复杂查询（借助 Specification） |
-| 005 | jpa-mysql-04 | SpringBoot JPA 实现复杂查询（借助 [jpa-spec](https://github.com/wenhao/jpa-spec)） |
-| 007 | pan-files-share | SpringBoot JPA 网盘目录数据存储接口实现 |
+- 000-start
+  - 基于 SpringBoot 的初始化项目
+  - 构建自 https://start.aliyun.com 
+  - 默认未说明情况下所有项目都是基于这个为底座进行构建
+- 001-hello-world
+  - 实现常用接口方法，不同请求体，响应体结构
+  - Restful API 风格示例
+- 002-jpa-mysql-01
+  - JPA 实现简单 CURD
+  - 实现表关联查询
+  - 实现 JPA Auditor 自动插入更新日期时间
+- 003-jpa-mysql-02
+  - JPA 实现复杂查询
+  - 手写 SQL 语句
+  - 借助 Specification
+- 004-jpa-mysql-03
+  - JPA 借助 [jpa-spec](https://github.com/wenhao/jpa-spec) 实现复杂查询
+  - 大牛封装的 Specification 工具集，可以拜读一下源码，不是太复杂
+- 005-datasource-config
+  - 数据源常用配置
+  - 多种数据源配置参考
+  - 常用连接池配置
+- 006-multi-datasource-01
+  - 多数据源配置
+  - 项目接入多个数据源，不同的表结构定义适配
+- 007-pan-files-share
+  - 网盘分享群文件目录数据存储接口简单实现
