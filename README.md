@@ -41,3 +41,10 @@
   - 项目接入多个数据源，不同的表结构定义适配
 - 007-pan-files-share
   - 网盘分享群文件目录数据存储接口简单实现
+- 008-java-crawler-01
+  - 简易版网页爬虫，使用 HttpClient + Jsoup 实现
+  - 直接请求获取页面，并进行打印控制台
+  - 练习 HttpClient 的使用
+  - 练习 Jsoup 的使用
+- 008-java-crawler-02
+  - 掌握 webmagic 实现爬取网站数据
